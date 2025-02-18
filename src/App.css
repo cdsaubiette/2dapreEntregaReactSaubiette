@@ -1,31 +1,40 @@
-.App {
-  text-align: center;
+
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #89119d;
+  --highlight-color: #e74f08;
+  --light-bg-color: #f9f9f9;
+  --hover-bg-color: #ddd;
+  --font-color: #333;
+  --button-radius: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #9c27b0;
+  
+}
+div{
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ItemListContainer {
+  height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +45,204 @@
     transform: rotate(360deg);
   }
 }
+
+nav {
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+nav .logo {
+  width: 8rem; /* Ajuste del logo */
+  height: auto;
+  margin-left: 40%;
+}
+
+nav div {
+  display: flex;
+  gap: 1rem;
+}
+
+nav button {
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  color: var(--highlight-color);
+  background-color: #fff;
+  border: none;
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+nav button:hover {
+  background-color: var(--hover-bg-color);
+  transform: scale(1.05); /* Efecto de aumento al hacer hover */
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  color: #ffce00;
+  text-align: justify;
+  margin: auto;
+  width: 40%;
+  line-height: 1.7; /* Mejorar la altura de la línea para mayor legibilidad */
+}
+
+.Nosotros {
+  margin-top: 1.5rem;
+}
+
+.Controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Estilos Responsivos para pantallas pequeñas */
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .logo {
+    margin: 0;
+    width: 8rem; /* Ajustar el tamaño para pantallas pequeñas */
+  }
+
+  nav div {
+    display: flex;
+    gap: 1rem;
+  }
+
+  nav button {
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+  }
+
+  .ItemListContainer .ListGroup {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 4 */
+  }
+
+  p {
+    margin: 0.5rem 1rem;
+  }
+
+  .Controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.ItemListContainer .ListGroup {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas por fila */
+  gap: 1.5rem; /* Espacio entre las tarjetas */
+  justify-items: center; /* Centra las tarjetas dentro de cada celda */
+  margin-top: 1rem;
+  padding: 0 2rem; /* Añadir algo de relleno horizontal */
+}
+
+.CardItem {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 350px;
+  margin: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.2s ease;
+}
+
+.CardItem:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0.9; /* Agregar opacidad en el hover */
+}
+
+.Header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.ItemHeader {
+  font-size: 1.6rem;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold; /* Hacer el texto más destacado */
+}
+
+.CardItem picture {
+  width: 100%;
+  height: auto;
+}
+
+.ItemImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 2px solid #ddd;
+}
+
+section {
+  padding: 15px;
+}
+
+.Info {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: var(--font-color);
+}
+
+.Info:first-child {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+footer {
+  background-color: rgb(216, 231, 253);
+  padding: 15px;
+  text-align: center;
+  border-top: 2px solid #ddd;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+.ItemCount {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: rgb(14, 6, 6);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ItemCount:hover {
+  background-color: #0056b3;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+}
+
