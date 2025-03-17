@@ -1,29 +1,31 @@
 import CartWidget from '../CartWidget/CartWidget';
-import EcommerceStore from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
         <nav>
             <Link to='/'>
-                <img src={EcommerceStore} alt="Logo Ecommerce" className="logo" />
+                <img src="https://gcdnb.pbrd.co/images/KZ4VUilA7Ym1.webp?o=1" alt="Logo" className="logo" />
             </Link>
             
             <div>
                 <Link to={`/category/Lenguaje`}>
-                    <button>Lenguaje</button>
+                    <button>LENGUAJE</button>
                 </Link>
                 <Link to={`/category/Framework`}>
-                    <button>Framework</button>
+                    <button>FRAMEWORK</button>
                 </Link>
                 <Link to={`/category/Librería`}>
-                    <button>Librería</button>
+                    <button>LIBRERIA</button>
                 </Link>
                 <Link to={`/category/Herramienta`}>
-                    <button>Herramienta</button>
+                    <button>HERRAMIENTA</button>
+                </Link>
+                <Link to={`/contacto`}>
+                    <button>CONTACTO</button>
                 </Link>
                 <Link to={`/Nosotros`}>
-                    <button>Nosotros</button>
+                    <button>NOSOTROS</button>
                 </Link>
             </div>
             <CartWidget />

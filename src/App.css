@@ -25,47 +25,32 @@ div{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.ItemListContainer {
-  height: 100vh;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  height: 100%;
 }
 
 nav {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 2rem;
   background-color: var(--secondary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 nav .logo {
   width: 8rem; /* Ajuste del logo */
   height: auto;
-  margin-left: 40%;
+  
 }
 
 nav div {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap; /* Permite que los elementos dentro del div se ajusten */
+  justify-content: space-between; /* Alinea los elementos a la derecha */
 }
 
 nav button {
@@ -77,6 +62,8 @@ nav button {
   border-radius: var(--button-radius);
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s ease-in-out;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
 }
 
 nav button:hover {
@@ -84,20 +71,39 @@ nav button:hover {
   transform: scale(1.05); /* Efecto de aumento al hacer hover */
 }
 
+.App nav div a button {
+  width: 100%;
+  font-size: clamp(0.6rem, 2vw, 1rem);
+  padding: clamp(0.5rem, 1vw, 1rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.CartWidget{
+  margin-right: 2rem;
+}
+
 p {
   font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.1rem;
   color: #ffce00;
-  text-align: justify;
   margin: auto;
-  width: 40%;
-  line-height: 1.7; /* Mejorar la altura de la línea para mayor legibilidad */
+  line-height: 1.7;
 }
 
-.Nosotros {
+.NosotrosImg {
   margin-top: 1.5rem;
 }
+
+.NosotrosP{
+  width: 70%; 
+  margin: 0 auto; 
+  text-align: center;
+} 
 
 .Controls {
   display: flex;
@@ -107,59 +113,26 @@ p {
   margin-top: 1rem;
 }
 
-/* Estilos Responsivos para pantallas pequeñas */
-
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-
-  .logo {
-    margin: 0;
-    width: 8rem; /* Ajustar el tamaño para pantallas pequeñas */
-  }
-
-  nav div {
-    display: flex;
-    gap: 1rem;
-  }
-
-  nav button {
-    margin: 0.5rem;
-    padding: 1rem 2rem;
-  }
-
-  .ItemListContainer .ListGroup {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 4 */
-  }
-
-  p {
-    margin: 0.5rem 1rem;
-  }
-
-  .Controls {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
 .ItemListContainer .ListGroup {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas por fila */
-  gap: 1.5rem; /* Espacio entre las tarjetas */
-  justify-items: center; /* Centra las tarjetas dentro de cada celda */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: start;
   margin-top: 1rem;
-  padding: 0 2rem; /* Añadir algo de relleno horizontal */
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  grid-auto-flow: dense;
 }
+
 
 .CardItem {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-width: 350px;
   margin: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.2s ease;
 }
@@ -167,8 +140,143 @@ p {
 .CardItem:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  opacity: 0.9; /* Agregar opacidad en el hover */
+  opacity: 0.9; 
 }
+
+.CardItem h3{
+  align-items: center;
+}
+
+/* Container principal del carrito */
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 20px;
+  gap: 20px;
+}
+
+/* Contenedor de items */
+.cart-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Estilo para cada CartItem */
+.CartItem {
+  flex: 1;
+  min-width: 280px;
+  max-width: 800px;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Contenido dentro de CartItem */
+.CartItem p {
+  width: 80%;
+  margin: 10px auto;
+  text-align: center;
+  color: #ffce00;
+}
+
+.CartItem h4{
+  color: #ffce00;
+}
+
+
+
+/* Totales y botones del carrito */
+.cart-container h3 {
+  width: auto;
+  min-width: 20%;
+  max-width: 400px;
+  background-color: #ffce00;
+  padding: 15px 30px;
+  border-radius: 5px;
+  margin: 20px 0;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* Botones y enlaces del carrito */
+
+.cart-container a {
+  max-width: 300px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.Controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem auto;
+  width: 100%;
+}
+
+.Controls .buttoncart, .buyFinish{
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color:whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Controls .buttoncart:hover {
+  background-color: var(--highlight-color);
+  transform: translateY(-5px);
+}
+
+.buyFinish{
+  width: 20%;
+  height: 2rem;
+}
+.buyFinish:hover{
+  transform: translateY(-5px);
+ 
+}
+
+
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .CartItem {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+
+  .cart-container h3,
+  .cart-container a {
+    width: 50%;
+    max-width: none;
+  }
+}
+
 
 .Header {
   background-color: var(--primary-color);
@@ -181,7 +289,7 @@ p {
   font-size: 1.6rem;
   margin: 0;
   text-transform: uppercase;
-  font-weight: bold; /* Hacer el texto más destacado */
+  font-weight: bold; 
 }
 
 .CardItem picture {
@@ -190,10 +298,27 @@ p {
 }
 
 .ItemImg {
-  width: 100%;
+  width: 65%;
   height: auto;
   object-fit: cover;
   border-bottom: 2px solid #ddd;
+}
+
+.ItemImgCart{
+  width: 65%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 2px solid #ddd;
+  border-radius: 1.5rem;
+}
+
+picture h4{
+  margin: 0;
+  padding: 0;
+}
+
+picture:hover{
+  transform: translateY(-5px);
 }
 
 section {
@@ -246,3 +371,285 @@ footer p {
   padding: 20px;
 }
 
+/* Estilos para el carrito de compras */
+.CartWidget {
+  position: relative; 
+  display: inline-block; 
+}
+
+.CartImg {
+  display: block; 
+  width: 30%; 
+  height: auto; 
+}
+
+.CartQuantity {
+  position: absolute; 
+  top: 42%; 
+  left: 17%; 
+  transform: translate(-50%, -50%); 
+  color: white; 
+  font-size: 25px; 
+  font-weight: bold; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 5px 10px; 
+  border-radius: 50%; 
+  pointer-events: none; 
+  opacity: 70%;
+}
+
+/* estilos para los botonese en el Cart */
+.Controls .button{
+  border-radius: 5px;
+  border: none;
+}
+
+.Controls .button:hover{
+  background-color: #ffce00;
+  transform: translateY(-5px);
+}
+
+.cleanCart{
+  width: 20%;
+  text-align: center;
+}
+
+.Eliminar, .cleanCart, .buyFinish{
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+
+}
+
+.Eliminar:hover, .cleanCart:hover, .buyFinish:hover{
+  background-color: #e74f08;
+  transform: translateY(-5px);
+  color: white  ;
+}
+
+.Eliminar{
+  width: 40%;
+}
+
+
+/* Contacto */
+.container{
+  width: 20%;
+}
+
+.container h1{
+  text-align: center;
+}
+/* Estilos para el formulario de Contacto */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  
+}
+
+.formulario input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+}
+
+.enviar {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.enviar:hover {
+  background-color: var(--highlight-color);
+}
+
+/* Container principal del carrito */
+.cart-container {
+  display: flex;
+  flex-direction: row; /* Cambiado a row para layout horizontal */
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 20px;
+  gap: 2rem;
+}
+
+/* Sección de items del carrito */
+.cart-items-section {
+  flex: 3; /* Dar más espacio a los items */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* CartItem dentro de cart-items-section */
+.cart-items-section .CartItem {
+  width: 100%; /* Ocupar todo el ancho disponible */
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  margin: 0.5rem 0;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Contenido dentro de CartItem */
+.cart-items-section .CartItem > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+/* Resumen lateral */
+.cart-summary {
+  flex: 1; /* Proporción más pequeña para el resumen */
+  align-self: flex-start; /* Alinear al inicio */
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-width: 350px;
+  box-shadow: var(--shadow-sm);
+  
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  color: var(--yellow-accent);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffce00;
+  font-weight: bold;
+}
+
+.summary-total h3 {
+  color: var(--yellow-accent);
+  font-size: 1.5rem;
+  margin-bottom: .1rem;
+  margin-left: 0.7rem;
+  text-align: center;
+  width: 72%;
+}
+
+.buyFinish{
+  width: 80%;
+  color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  display: block;
+  background-color: var(--primary-color);
+}
+
+.buyFinish:hover, .OptionCart:hover {
+  transform: translateY(-2px);
+  background-color: blue;
+}
+
+.OptionCart {
+  width: 95%;
+  color: white;
+  padding: 1rem;
+  margin-top: 5rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  display: block;
+  background-color: var(--primary-color);
+}
+
+.mensaje-exito {
+  color: #ffce00;
+  font-weight: bold;
+  text-align: center;
+  margin-top:5rem;
+  margin-bottom:5rem;
+  font-size: 2rem;
+}
+
+
+
+/* Media query para responsive */
+@media (max-width: 768px) {
+  .cart-container {
+      flex-direction: column;
+  }
+
+  .cart-summary {
+      position: static;
+      max-width: none;
+      width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estilos Responsivos para pantallas pequeñas */
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .logo {
+    margin: 0;
+    width: 8rem; /* Ajustar el tamaño para pantallas pequeñas */
+  }
+
+  nav div {
+    display: flex;
+    gap: 1rem;
+  }
+
+  nav button {
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+  }
+
+   .ItemListContainer .ListGroup {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 4 */
+  }
+
+  .Controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
